@@ -1,5 +1,12 @@
 <template>
   <article class="all">
+    <section>
+      <commingSoon>
+        <center>
+          <h1> [Coming Soon] </h1>
+        </center>
+      </commingSoon>
+    </section>
     <main-footer></main-footer>
   </article>
 </template>
@@ -12,23 +19,8 @@ export default {
     }
   },
   methods: {
-    openBox (name, sponsor) {
-      this.sponsorLevel = name
-      this.sponsorName = sponsor.name
-      this.sponsorSummary = sponsor.summary
-      this.sponsorImage = sponsor.icon
-      this.activityBox = true
-    }
   },
   watch: {
-    activityBox: function (state) {
-      var self = this
-      if (!state) {
-        setTimeout(function () {
-          self.sponsorImage = ''
-        }, 400)
-      }
-    }
   }
 }
 </script>
@@ -40,6 +32,7 @@ article
   width: 100%
   background-color: white
   section
+    min-height: 85vh
     text-align: left
     padding-top: 40px
     padding-bottom: 40px

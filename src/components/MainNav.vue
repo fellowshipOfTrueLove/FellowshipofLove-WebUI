@@ -118,7 +118,7 @@ nav
           p
             display: block
             position: relative
-            top: 0px
+            top: 3px
             font-weight: 400
             font-size: 12px
           &:after

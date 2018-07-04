@@ -1,5 +1,12 @@
 <template>
   <article>
+    <section>
+      <commingSoon>
+        <center>
+          <h1> [Coming Soon] </h1>
+        </center>
+      </commingSoon>
+    </section>
     <main-footer></main-footer>
   </article>
 </template>
@@ -16,6 +23,7 @@ article
   width: 100%
   background-color: white
   section
+    min-height: 85vh
     text-align: left
     padding-top: 20px
     padding-bottom: 40px

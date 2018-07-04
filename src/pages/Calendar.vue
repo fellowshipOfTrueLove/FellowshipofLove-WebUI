@@ -1,5 +1,12 @@
 <template>
   <article>
+    <section>
+      <commingSoon>
+        <center>
+          <h1> [Coming Soon] </h1>
+        </center>
+      </commingSoon>
+    </section>
     <main-footer></main-footer>
   </article>
 </template>
@@ -20,6 +27,8 @@ export default {
 article
   width: 100%
   background-color: white
+  section
+    min-height: 85vh
   p.temp
     font-size: 36px
     height: 70vh
@@ -85,34 +94,6 @@ article
         width: 99%
         text-align: center
         font-size: 24px
-    .hackmd
-      width: 30%
-      position: relative
-      img
-        position: absolute
-        text-align: left
-      p
-        width: 99%
-        text-align: center
-        font-size: 24px
-    .disable
-      opacity: 0.5
-      cursor: default
-      position: relative
-      &:hover,&:active
-        opacity: 0.5
-        &:after
-          position: absolute
-          top: 0
-          bottom: 0
-          left: 0
-          right: 0
-          border-radius: 12px
-          background-color: $main-color
-          content: '敬請期待'
-          text-align: center
-          padding: 12px
-          font-size: 18px
 @media all and (max-width: 1000px)
   article
     section.activity
@@ -124,7 +105,5 @@ article
           width: 100%
           font-size: 18px
       .broadcast
-        width: 95%
-      .hackmd
         width: 95%
 </style>

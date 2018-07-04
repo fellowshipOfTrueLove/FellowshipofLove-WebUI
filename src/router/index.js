@@ -23,19 +23,6 @@ export default new Router({
       meta: { index: 1 }
     },
     {
-      path: '/calendar/:activityId',
-      name: 'AgendaActivity',
-      component: Calendar,
-      meta: { index: 1, page: false },
-      props: true
-    },
-    {
-      path: '/calendar/sub/:subId',
-      name: 'AgendaSub',
-      component: Calendar,
-      meta: { index: 1, page: false }
-    },
-    {
       path: '/songbook',
       name: 'Songbook',
       component: Songbook,

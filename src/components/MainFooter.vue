@@ -1,7 +1,7 @@
 <template>
   <footer class="Footer">
     <div>
-      <p>© 真愛團契 | Fellowship of True Love</p>
+      <p>© 真愛團契 | Fellowship of Love</p>
     </div>
   </footer>
 </template>
