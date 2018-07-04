@@ -1,8 +1,8 @@
 {
-  "name": "sitcon-2018",
+  "name": "FellowshipofTrueLove",
   "version": "1.0.0",
-  "description": "SITCON 2018 Official Website",
-  "author": "yoyo930021 <yoyo930021@gmail.com>",
+  "description": "Fellowship of True Love Website",
+  "author": "blackkite0206233",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
