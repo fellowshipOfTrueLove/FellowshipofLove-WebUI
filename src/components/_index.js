@@ -3,5 +3,5 @@ import MainFooter from './MainFooter'
 
 export default {
   MainNav,
-  MainFooter,
+  MainFooter
 }
