@@ -13,7 +13,7 @@
 
 <script>
   export default {
-    name: 'Sheet'
+    name: 'Wishingwell'
   }
 </script>
 

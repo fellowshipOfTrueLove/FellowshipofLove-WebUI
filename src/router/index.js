@@ -4,7 +4,7 @@ import Main from '../pages/Main'
 import Calendar from '../pages/Calendar'
 import Songbook from '../pages/Songbook'
 import Biblebus from '../pages/Biblebus'
-import Sheet from '../pages/Sheet'
+import Wishingwell from '../pages/Wishingwell'
 
 Vue.use(Router)
 
@@ -24,20 +24,20 @@ export default new Router({
     },
     {
       path: '/songbook',
-      name: 'Songbook',
+      name: 'SongBook',
       component: Songbook,
       meta: { index: 2 }
     },
     {
       path: '/biblebus',
-      name: 'Biblebus',
+      name: 'BibleBus',
       component: Biblebus,
       meta: { index: 3 }
     },
     {
-      path: '/sheet',
-      name: 'Sheet',
-      component: Sheet,
+      path: '/wishingwell',
+      name: 'WishingWell',
+      component: Wishingwell,
       meta: { index: 4 }
     }
   ],

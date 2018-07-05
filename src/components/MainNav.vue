@@ -2,12 +2,13 @@
   <header class="Navbar">
     <nav :class="{ open: toggle }">
       <div class="container">
+        <div class="nav-side-btn" v-on:click="toggle = !toggle"></div>
         <div class="nav-left">
           <router-link class="item" v-on:click.native="toggle = !toggle" v-bind:class="{active: $route.name == 'Main'}" to="/"><div>首頁<p>HOME</p></div></router-link>
           <router-link class="item divider" v-on:click.native="toggle = !toggle" v-bind:class="{active: $route.name == 'Calendar'}" to="/calendar"><div>聚會行事曆<p>CALENDAR</p></div></router-link>
           <router-link class="item divider" v-on:click.native="toggle = !toggle" v-bind:class="{active: $route.name == 'SongBook'}" to="/songbook"><div>詩歌資料庫<p>SONG BOOK</p></div></router-link>
           <router-link class="item divider" v-on:click.native="toggle = !toggle" v-bind:class="{active: $route.name == 'BibleBus'}" to="/biblebus"><div>經文列車<p>BIBLE BUS</p></div></router-link>
-          <router-link class="item divider" v-on:click.native="toggle = !toggle" v-bind:class="{active: $route.name == 'Sheet'}" to="/sheet"><div>開坑專區<p>SHEET</p></div></router-link>
+          <router-link class="item divider" v-on:click.native="toggle = !toggle" v-bind:class="{active: $route.name == 'WishingWell'}" to="/wishingwell"><div>開坑專區<p>WISHING WELL</p></div></router-link>
         </div>
       </div>
       <div class="side-blur"></div>
