@@ -1,6 +1,6 @@
 <template>
   <article>
-      <time-line></time-line>
+    <time-line></time-line>
     <main-footer class="footer"></main-footer>
   </article>
 </template>

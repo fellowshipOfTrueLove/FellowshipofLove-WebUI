@@ -12,10 +12,12 @@
     "test": "echo 'No test'"
   },
   "dependencies": {
+    "@mdi/font": "^2.4.85",
     "hoek": "^5.0.3",
     "lodash": "^4.17.4",
     "ol": "^4.6.4",
     "vue": "^2.5.2",
+    "vue-material-design-icons": "^1.5.1",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {

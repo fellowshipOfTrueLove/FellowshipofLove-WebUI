@@ -16,6 +16,8 @@
 @import '../sass/global.sass'
 footer
   height: 100px
+  @media all and (max-height: 700px)
+    height: 60px
   text-align: center
   background-color: $main-color
   &:before
