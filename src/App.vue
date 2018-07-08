@@ -8,6 +8,7 @@
         </keep-alive>
       </transition>
     </main>
+    <main-footer :class="$route.name"></main-footer>
   </div>
 </template>
 
@@ -53,4 +54,8 @@ main.app
   transition-property: transform,opacity
   transition-duration: .5s
   transition-timing-function: cubic-bezier(.55,0,.1,1)
+.BibleBus
+  position: fixed
+  width: 100%
+  bottom: 0
 </style>

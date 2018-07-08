@@ -115,7 +115,7 @@ nav
           display: inline-block
           vertical-align: middle
           font-size: 16px
-          font-weight: 800
+          font-weight: 400
           p
             display: block
             position: relative

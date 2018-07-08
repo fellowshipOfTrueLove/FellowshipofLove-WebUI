@@ -1,7 +1,7 @@
 <template>
   <article>
     <time-line></time-line>
-    <main-footer class="footer"></main-footer>
+    <!-- <main-footer class="footer"></main-footer> -->
   </article>
 </template>
 
@@ -23,8 +23,8 @@ article
   width: 100%
   background-color: white
   
-.footer
-  position: fixed
-  width: 100%
-  bottom: 0
+// .footer
+//   position: fixed
+//   width: 100%
+//   bottom: 0
 </style>

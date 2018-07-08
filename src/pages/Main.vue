@@ -48,7 +48,7 @@
         </div>
       </div>
     </section>
-    <main-footer></main-footer>
+    <!-- <main-footer></main-footer> -->
   </article>
 </template>
 
