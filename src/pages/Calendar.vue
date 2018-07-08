@@ -7,7 +7,6 @@
         </center>
       </commingSoon>
     </section>
-    <!-- <main-footer></main-footer> -->
   </article>
 </template>
 
@@ -17,7 +16,8 @@ export default {
   props: {
   },
   data () {
-    return {}
+    return {
+    }
   }
 }
 </script>

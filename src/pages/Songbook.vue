@@ -7,7 +7,6 @@
         </center>
       </commingSoon>
     </section>
-    <!-- <main-footer></main-footer> -->
   </article>
 </template>
 

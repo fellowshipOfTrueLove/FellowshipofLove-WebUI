@@ -47,22 +47,39 @@ div.item {
 }
 
 .inner { 
+  margin-top: 3rem;
   margin-left: auto;
   margin-right: auto;
   position: relative; 
   height: auto; 
 }
 
+.year {
+  text-align: left;
+  h3 {
+    float: left;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 5rem;
+    color: #888;
+    margin: 0;
+    font: {
+      size: 1em;
+      weight: 400;
+    }
+    @media all and (max-width: 1000px) {
+      visibility: hidden;
+    }
+  }
+}
+
 .timeline {
-  margin-top: 3rem;
+  margin-left: 50px;
   list-style: none;
   padding: 20px 0 20px;
   position: relative;
   width: 40vw;
   text-align: left;
-  @media all and (max-height: 700px) {
-    margin-top: 3rem;
-  }
   @media all and (max-width: 1500px) {
     margin-left: 0vw;
     width: 50vw;
