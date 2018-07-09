@@ -64,7 +64,7 @@ div.item {
     color: #888;
     margin: 0;
     font: {
-      size: 1em;
+      size: 1.4em;
       weight: 400;
     }
     @media all and (max-width: 1000px) {
@@ -165,6 +165,9 @@ div.item {
       top: 16px;
       width: 50px;
       z-index: 100;
+      &.non-board {
+        border: none;
+      }
     }
     .timeline-badge+.timeline-panel {
       &:before {
@@ -192,6 +195,12 @@ div.item {
         top: 27px;
       }
     }
+  }
+}
+
+.timeline-badge {
+  &.white {
+    background-color: white !important;
   }
 }
 

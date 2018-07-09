@@ -28,6 +28,13 @@
             </li>
           </ul>
         </div>
+        <div>
+          <ul class="timeline">
+            <li class="timeline-item">
+              <div class="timeline-badge white non-board" @click="getMore()"><dot-icon class="icon gray big" title=""/></div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -150,6 +157,9 @@
     methods: {
       clk: function (item) {
         item.hide = !item.hide
+      },
+      getMore: function () {
+        console.log('get')
       }
     }
   }
@@ -159,6 +169,16 @@
 @import '../sass/timeline.scss'
 
 .icon
-  top: -5px;
+  font-size: 1.2em;
+  top: -6px;
+  &.big
+    top: -4px;
+    font-size: 2em;
+
+.icon
+  &.black
+    color: black;
+  &.gray
+    color: #A5A5A5;
 
 </style>
