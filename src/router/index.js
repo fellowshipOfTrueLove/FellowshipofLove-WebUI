@@ -23,6 +23,12 @@ export default new Router({
       meta: { index: 1 }
     },
     {
+      path: '/calendar/sub/:subId',
+      name: 'CalendarSub',
+      component: Calendar,
+      meta: { index: 1, page: false }
+    },
+    {
       path: '/songbook',
       name: 'SongBook',
       component: Songbook,

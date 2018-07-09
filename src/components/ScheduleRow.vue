@@ -1,6 +1,6 @@
 <template>
   <tr class="sub">
-    <td class="time">{{ formatTime(new Date(value)) }}</td>
+    <td class="time">{{ formatDate(new Date(value)) }}</td>
     <!-- <template v-if="res[value][0].subject === '午餐'">
       <sub-table-col colspan="4" :siteSub="res[value][0]" :times="times" @openBox="openBox" :key="'broadcast:'+indexx"></sub-table-col>
     </template> -->
@@ -28,8 +28,8 @@ export default {
       if (num / 10 < 1) return '0' + num
       else return num
     },
-    formatTime (date) {
-      return this.paddingLeft(date.getHours()) + ':' + this.paddingLeft(date.getMinutes())
+    formatDate (date) {
+      return this.paddingLeft(date.getMonth() + 1) + '/' + this.paddingLeft(date.getDate())
     },
     findSiteSub (site, subs) {
       return _.find(subs, (value) => { return value.room === site })

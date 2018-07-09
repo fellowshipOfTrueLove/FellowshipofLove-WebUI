@@ -13,11 +13,14 @@
       <mobile-row v-for="(value) in times" :notop="notop" :value="value" :res="res" @openBox="goSub" :key="'times:'+value"></mobile-row>
     </div>
     <fancybox class="box" v-model="activityBox">
-      <h2>{{subSubject}}</h2>
-      <p class="text">{{subSummary}}</p>
+      <h2><span v-if="type !== '' && type !== '其他'">{{ type }} - </span><span>{{ topic }}</span></h2>
+      <p class="text">負責人: {{ moderator !== '' ? moderator : 'N/A' }}</p>
+      <p class="text"><span>領會: {{ worshipLeader !== '' ? worshipLeader : 'N/A' }}</span><span>司琴: {{ worshipPianist !== '' ? worshipPianist : 'N/A' }}</span></p>
+      <p class="text" v-if="worshipGroup !== ''">敬拜小組: {{ worshipGroup }}</p>
       <h3 v-if="subSpeakerName!==''">{{ 'About '+subSpeakerName }}</h3>
-      <div class="content" v-if="subSpeakerName!==''">
-        <div class="text">{{subBio}}</div>
+      <h4>簡介</h4>
+      <div class="content" v-if="introduction !== ''">
+        <div class="text">{{ introduction }}</div>
       </div>
     </fancybox>
   </div>
@@ -32,12 +35,14 @@ export default {
     return {
       times: [],
       activityBox: false,
-      subSubject: '',
-      subSummary: '',
-      subslides: '',
-      subSpeakerName: '',
-      subAvatar: '',
-      subBio: '',
+      worshipLeader: '',
+      worshipPianist: '',
+      worshipGroup: '',
+      topic: '',
+      introduction: '',
+      type: '',
+      moderator: '',
+      date: '',
       mobile: false,
       notop: false
     }
@@ -45,7 +50,6 @@ export default {
   computed: {
     subs: function () {
       // let result = submissions.slice()
-      // if (!this.mobile) result = this.filterSub(result)
       return null
     },
     res: function () {
@@ -55,37 +59,28 @@ export default {
         end: new Date(slot.end)
       }))
       this.times = _.map(temp, 'start')
-      this.times = _.uniqBy(this.times, this.formatTime)
+      this.times = _.uniqBy(this.times, this.formatDate)
       this.times = this.times.slice().sort()
 
       return _.groupBy(temp, (schedule) => (schedule.start))
     }
   },
   methods: {
-    filterSub (subs) {
-      let array = ['午餐']
-      let result = subs.filter((value) => {
-        return array.indexOf(value.subject) === -1
-      })
-      return result
-    },
     paddingLeft (num) {
       if (num / 10 < 1) return '0' + num
       else return num
     },
-    formatTime (date) {
-      return this.paddingLeft(date.getHours()) + ':' + this.paddingLeft(date.getMinutes())
+    formatDate (date) {
+      return this.paddingLeft(date.getMonth() + 1) + '/' + this.paddingLeft(date.getDate())
     },
     goSub (sub) {
-      this.$router.replace('/agenda/sub/' + sub.id)
+      this.$router.replace('/schedule/sub/' + sub.id)
     },
     openBox (sub) {
-      this.subSubject = sub.subject
-      this.subslides = sub.slide
-      this.subAvatar = sub.speaker.avatar
-      this.subBio = sub.speaker.bio
-      this.subSpeakerName = sub.speaker.name
-      this.subSummary = sub.summary
+      let list = ['worshipLeader', 'worshipPianist', 'worshipGroup', 'topic', 'introduction', 'type', 'moderator', 'date']
+      for (let i of list) {
+        this[i] = sub[i]
+      }
       this.activityBox = true
     },
     resize () {
@@ -93,13 +88,6 @@ export default {
     }
   },
   created () {
-    window._rowspan = {
-      'R2': 0,
-      'R0': 0,
-      'R1': 0,
-      'R3': 0,
-      'S': 0
-    }
   },
   mounted () {
     var self = this
@@ -124,7 +112,7 @@ export default {
         setTimeout(function () {
           self.subAvatar = ''
         }, 400)
-        self.$router.replace('/agenda')
+        self.$router.replace('/schedule')
       }
     },
     '$route.params.subId': function (state) {
