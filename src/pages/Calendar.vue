@@ -1,12 +1,6 @@
 <template>
   <article>
-    <section>
-      <commingSoon>
-        <center>
-          <h1> [Coming Soon] </h1>
-        </center>
-      </commingSoon>
-    </section>
+    <schedule></schedule>
   </article>
 </template>
 
@@ -17,6 +11,54 @@ export default {
   },
   data () {
     return {
+      Calendar: [
+        [
+          {
+            uid: 0,
+            date: '2018 07 07',
+            worshipLeader: '以誠',
+            worshipPianist: '詩吟姐',
+            worshipGroup: '',
+            topic: '迎新送舊',
+            introduction: '真愛迎新聚會! 歡迎第一次來參加的來參加看看～',
+            type: '其他',
+            moderator: ''
+          },
+          {
+            uid: 1,
+            date: '2018 08 04',
+            worshipLeader: '麥可',
+            worshipPianist: '韓寧',
+            worshipGroup: '核心同工',
+            topic: '新生命 I：使二4-47',
+            introduction: '',
+            type: '小組查經',
+            moderator: ''
+          },
+          {
+            uid: 0,
+            date: '2018 09 01',
+            worshipLeader: '',
+            worshipPianist: '',
+            worshipGroup: '第三小組',
+            topic: '新生命 II：羅七14-八39',
+            introduction: '',
+            type: '小組查經',
+            moderator: ''
+          },
+          {
+            uid: 0,
+            date: '2018 10 06',
+            worshipLeader: '',
+            worshipPianist: '',
+            worshipGroup: '',
+            topic: '新生命 III：加四1-31',
+            introduction: '',
+            type: '小組查經',
+            moderator: ''
+          }
+        ]
+      ]
     }
   }
 }
