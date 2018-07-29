@@ -4,7 +4,7 @@
       <template v-if="findSub(index + startMonth, res[value[0].weeks]) !== undefined">
         <schedule-col :broadcast="false"  :sub="findSub(index + startMonth, res[value[0].weeks])"  @openBox="openBox" :key="indexx+':'+index"></schedule-col>
       </template>
-      <td class="item space" v-else-if="isNullItem(index)" :key="'space:'+index"></td>
+      <td class="item space" v-else :key="'space:'+index"></td>
     </template>
   </tr>
 </template>
@@ -32,29 +32,18 @@ export default {
     },
     findSub (index, subs) {
       let self = this
-      return _.find(subs, (value) => { return self.getMonth(value.date) === index })
-    },
-    isNullItem (index) {
-      // if (window._rowspan[index] !== 0) {
-      //   window._rowspan[index]--
-      //   return false
-      // } else {
-      //   return true
-      // }
-      return false
+      return _.find(subs, (value) => { return self.getMonth(value.date) + 1 === index })
     },
     openBox (sub) {
       this.$emit('openBox', sub)
     }
-  },
-  mounted () {
-    console.log(this.value)
   }
 }
 </script>
 
 <style lang="sass" scoped>
 $time-width: 60px
+$item-width: 20vw
 .sub
   font-size: 18px
   .time
@@ -62,6 +51,7 @@ $time-width: 60px
     vertical-align: top
     padding-right: 12px
   .item
+    width: $item-width
     background-color: #73828A
     color: white
     padding: 12px
@@ -72,9 +62,7 @@ $time-width: 60px
       opacity: 0.6
     p
       font-size: 16px
-  // .space
-  //   background-color: rgba(0,0,0,0)
-@media all and (max-width: 1000px)
+@media all and (max-width: 1200px)
   .sub
     $time-width: 60px
     font-size: 14px
@@ -84,6 +72,7 @@ $time-width: 60px
       padding-left: 4px
       padding-right: 4px
     .item
+      width: $item-width
       background-color: #73828A
       color: white
       padding: 6px

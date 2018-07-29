@@ -86,11 +86,21 @@
         right: 15px
         cursor: pointer
       h2
-        font-size: 28px
+        font-size: 3rem
         padding-bottom: 40px
+        @media all and (max-width: 800px)
+          font-size: 2rem
+        @media all and (max-width: 500px)
+          font-size: 1.5rem
+        @media all and (max-width: 400px)
+          font-size: 1.3rem
+      p
+        font-size: 1.5rem
+        padding-top: 5px
+        @media all and (max-width: 800px)
+          font-size: 1rem
         span
-          margin-left: 30px
-          font-size: 24px
+          padding-right: 20px
       .content
         padding-top: 0px
         padding-bottom: 0px
@@ -101,7 +111,8 @@
           display: inline-block
           vertical-align: top
         .text
-          font-size: 18px;
+          padding-left: 30px
+          font-size: 24px;
           width: 65%
           height: auto
           padding-top: 0px
@@ -134,13 +145,18 @@
             background-position: center center
             background-repeat: no-repeat
       h3
-        font-size: 28px
+        font-size: 2rem
+        @media all and (max-width: 800px)
+          font-size: 1.5rem
+        @media all and (max-width: 500px)
+          font-size: 1rem
         padding-top: 40px
-        padding-bottom: 40px
-@media all and (max-width: 1000px)
+        padding-bottom: 20px
+@media all and (max-width: 1200px)
   .fancybox
     .box-content
       div.container
+        padding-left: 5%
         padding-right: 15px
         width: 100%
         .content

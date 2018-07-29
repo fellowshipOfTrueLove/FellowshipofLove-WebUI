@@ -14,14 +14,14 @@
       </table>
     </div>
     <div v-else class="mobile-table">
-      <mobile-row v-for="(value, index) in subs" :notop="notop" :res="res" @openBox="goSub" :key="'times:'+index"></mobile-row>
+      <mobile-row v-for="(value, index) in subs" :value="value" :notop="notop" @openBox="goSub" :key="'times:'+index"></mobile-row>
     </div>
     <fancybox class="box" v-model="activityBox">
-      <h2><span v-if="type !== '' && type !== '其他'">{{ type }} - </span><span>{{ topic }}</span></h2>
-      <p class="text">負責人: {{ moderator !== '' ? moderator : 'N/A' }}</p>
-      <p class="text"><span>領會: {{ worshipLeader !== '' ? worshipLeader : 'N/A' }}</span><span>司琴: {{ worshipPianist !== '' ? worshipPianist : 'N/A' }}</span></p>
-      <p class="text" v-if="worshipGroup !== ''">敬拜小組: {{ worshipGroup }}</p>
-      <h4>簡介</h4>
+      <h2><span v-if="type !== undefined && type !== '' && type !== '其他'">{{ type }} &nbsp; - &nbsp;</span><span>{{ topic }}</span></h2>
+      <p class="text">負責人：{{ moderator !== undefined && moderator !== '' ? moderator : 'N/A' }}</p>
+      <p class="text"><span>領會：{{ worshipLeader !== undefined && worshipLeader !== '' ? worshipLeader : 'N/A' }}</span><span>司琴：{{ worshipPianist !== undefined && worshipPianist !== '' ? worshipPianist : 'N/A' }}</span></p>
+      <p class="text">敬拜小組：{{ worshipGroup !== undefined && worshipGroup !== '' ? worshipGroup : 'N/A' }}</p>
+      <h3>簡介</h3>
       <div class="content" v-if="introduction !== ''">
         <div class="text">{{ introduction }}</div>
       </div>
@@ -38,24 +38,27 @@ export default {
     return {
       times: [
         {
+          uid: '0',
           date: new Date('07 07 2018'),
           weeks: 0,
           worshipLeader: 'Micheal',
           worshipPianist: '韓寧',
-          topic: 'a',
+          topic: 'aaaaaa',
           introduction: 'aaa',
           type: '小組查經'
         },
         {
+          uid: '1',
           date: new Date('07 14 2018'),
           weeks: 1,
           worshipLeader: '0',
           worshipPianist: '1',
           topic: '迎新',
           introduction: 'aaaa',
-          type: '小組查經'
+          type: '其他'
         },
         {
+          uid: '2',
           date: new Date('07 21 2018'),
           weeks: 2,
           worshipLeader: '1',
@@ -65,6 +68,7 @@ export default {
           type: '小組查經'
         },
         {
+          uid: '3',
           date: new Date('07 28 2018'),
           weeks: 3,
           worshipLeader: '3',
@@ -74,38 +78,42 @@ export default {
           type: '小組查經'
         },
         {
+          uid: '4',
           date: new Date('08 04 2018'),
           weeks: 0,
           worshipLeader: 'Micheal',
           worshipPianist: '韓寧',
-          topic: 'a',
+          topic: '新生命 I：徒2:4-47',
           introduction: 'aaa',
           type: '小組查經'
         },
         {
+          uid: '5',
           date: new Date('08 11 2018'),
           weeks: 1,
           worshipLeader: '0',
           worshipPianist: '1',
           topic: '迎新',
           introduction: 'aaaa',
-          type: '小組查經'
+          type: '其他'
         },
         {
+          uid: '6',
           date: new Date('08 18 2018'),
           weeks: 2,
           worshipLeader: '1',
           worshipPianist: '2',
-          topic: 'b',
+          topic: '新基業 I：弗1:1-2:10',
           introduction: 'bbbb',
           type: '小組查經'
         },
         {
+          uid: '7',
           date: new Date('08 25 2018'),
           weeks: 3,
           worshipLeader: '3',
           worshipPianist: '4',
-          topic: 'c',
+          topic: '新基業 II：啟21:1-22:5',
           introduction: 'c',
           type: '小組查經'
         }
@@ -143,7 +151,7 @@ export default {
       return this.paddingLeft(date.getMonth() + 1) + '/' + this.paddingLeft(date.getDate())
     },
     goSub (sub) {
-      this.$router.replace('/schedule/sub/' + sub.id)
+      this.$router.replace('/calendar/sub/' + sub.uid)
     },
     openBox (sub) {
       let list = ['worshipLeader', 'worshipPianist', 'worshipGroup', 'topic', 'introduction', 'type', 'moderator', 'date']
@@ -168,7 +176,7 @@ export default {
     self.notop = window.location.search.match('mode=app') !== null
 
     if (this.$route.params.subId !== undefined) {
-      var item = _.find(this.subs, (value) => { return value.id === this.$route.params.subId })
+      var item = _.find(this.subs, (value) => { return value.uid === this.$route.params.subId })
       if (item !== undefined) {
         this.openBox(item)
       }
@@ -181,24 +189,27 @@ export default {
         setTimeout(function () {
           self.subAvatar = ''
         }, 400)
-        self.$router.replace('/schedule')
+        self.$router.replace('/calendar')
       }
     },
     '$route.params.subId': function (state) {
-      var item = _.find(this.subs, (value) => { return value.id === this.$route.params.subId })
+      var item = _.find(this.subs, (value) => value.uid === this.$route.params.subId)
       if (item !== undefined) {
         this.openBox(item)
       }
     }
   },
   destroyed () {
-    window.removeEventListener('resize')
+    window.removeEventListener('resize', function () {
+      self.resize()
+    })
   }
 }
 </script>
 
 <style lang="sass" scoped>
-div.subtable
+div.schedule
+  margin-top: 30px
   width: 100%
   $time-width: 80px
   margin-bottom: 20px
@@ -215,7 +226,7 @@ div.subtable
             width: 20%
             font-size: 16px
 @media all and (max-width: 1000px)
-  div.subtable
+  div.schedule
     $time-width: 60px
     div.container
       table

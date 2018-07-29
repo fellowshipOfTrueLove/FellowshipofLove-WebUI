@@ -1,9 +1,9 @@
 <template>
   <div class="mobile-item">
-    <div class="content" :class="clickable" v-for="(item,index) in res[value]" :key="'sub:'+index" @click.stop="openBox(item)">
-      <div class="timecol" :class="{'notop':notop}">{{ formatTime(value) }}</div>
+    <div class="content clickable" @click.stop="openBox(value)">
+      <div class="timecol" :class="{'notop':notop}">{{ formatTime(value.date) }}</div>
       <div>
-        <div class="topic">{{item.topic}}</div>
+        <div class="topic">{{value.topic}}</div>
       </div>
     </div>
   </div>
@@ -12,7 +12,7 @@
 <script>
   export default {
     name: 'MobileRow',
-    props: ['value', 'res', 'notop'],
+    props: ['value', 'notop'],
     methods: {
       paddingLeft (num) {
         if (num / 10 < 1) return '0' + num
