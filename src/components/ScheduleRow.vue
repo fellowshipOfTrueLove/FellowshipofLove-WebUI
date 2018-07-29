@@ -1,19 +1,10 @@
 <template>
   <tr class="sub">
-    <td class="time">{{ formatDate(new Date(value)) }}</td>
-    <!-- <template v-if="res[value][0].subject === '午餐'">
-      <sub-table-col colspan="4" :siteSub="res[value][0]" :times="times" @openBox="openBox" :key="'broadcast:'+indexx"></sub-table-col>
-    </template> -->
-    <template v-if="res[value].length === 1 && res[value][0].broadcast !== undefined">
-      <schedule-col :broadcast="true" :siteSub="res[value][0]" :times="times" @openBox="openBox" :key="'broadcast:'+indexx"></schedule-col>
-    </template>
-    <template v-else>
-      <template v-for="(site, index) in sites">
-        <template v-if="findSiteSub(site, res[value]) !== undefined">
-          <schedule-col :broadcast="false"  :siteSub="findSiteSub(site, res[value])" :times="times" @openBox="openBox" :key="indexx+':'+index"></schedule-col>
-        </template>
-        <td class="item space" v-else-if="isNullItem(site)" :key="'space:'+index"></td>
+    <template v-for="index in len">
+      <template v-if="findSub(index + startMonth, res[value[0].weeks]) !== undefined">
+        <schedule-col :broadcast="false"  :sub="findSub(index + startMonth, res[value[0].weeks])"  @openBox="openBox" :key="indexx+':'+index"></schedule-col>
       </template>
+      <td class="item space" v-else-if="isNullItem(index)" :key="'space:'+index"></td>
     </template>
   </tr>
 </template>
@@ -22,7 +13,12 @@
 import _ from 'lodash'
 export default {
   name: 'ScheduleRow',
-  props: ['indexx', 'value', 'res', 'times', 'sites'],
+  props: ['indexx', 'value', 'res', 'startMonth'],
+  data () {
+    return {
+      len: 4
+    }
+  },
   methods: {
     paddingLeft (num) {
       if (num / 10 < 1) return '0' + num
@@ -31,20 +27,28 @@ export default {
     formatDate (date) {
       return this.paddingLeft(date.getMonth() + 1) + '/' + this.paddingLeft(date.getDate())
     },
-    findSiteSub (site, subs) {
-      return _.find(subs, (value) => { return value.room === site })
+    getMonth (date) {
+      return date.getMonth()
     },
-    isNullItem (site) {
-      if (window._rowspan[site] !== 0) {
-        window._rowspan[site]--
-        return false
-      } else {
-        return true
-      }
+    findSub (index, subs) {
+      let self = this
+      return _.find(subs, (value) => { return self.getMonth(value.date) === index })
+    },
+    isNullItem (index) {
+      // if (window._rowspan[index] !== 0) {
+      //   window._rowspan[index]--
+      //   return false
+      // } else {
+      //   return true
+      // }
+      return false
     },
     openBox (sub) {
       this.$emit('openBox', sub)
     }
+  },
+  mounted () {
+    console.log(this.value)
   }
 }
 </script>

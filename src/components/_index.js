@@ -4,7 +4,8 @@ import TimeLine from './TimeLine'
 import Schedule from './Schedule'
 import ScheduleCol from './ScheduleCol'
 import ScheduleRow from './ScheduleRow'
-import FancyBox from './FancyBox'
+import MobileRow from './MobileRow'
+import Fancybox from './FancyBox'
 import CommentIcon from 'vue-material-design-icons/comment-text-outline.vue'
 import DotIcon from 'vue-material-design-icons/dots-vertical.vue'
 
@@ -15,7 +16,8 @@ export default {
   Schedule,
   ScheduleCol,
   ScheduleRow,
-  FancyBox,
+  MobileRow,
+  Fancybox,
   CommentIcon,
   DotIcon
 }

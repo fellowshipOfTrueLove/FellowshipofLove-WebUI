@@ -3,21 +3,24 @@
     <div v-if="!mobile" class="container">
       <table>
         <tbody>
+          <tr>
+            <td>
+            </td>
+          </tr>
           <template v-if="res !== null">
-            <schedule-row v-for="(value, index) in times" :indexx="index" :value="value" :res="res" :times="times" :sites="sites" @openBox="goSub" :key="'row:'+index"></schedule-row>
+            <schedule-row v-for="(value, index) in res" :value="value" :indexx="index" :res="res" :startMonth="getMonth(value[0].date)" @openBox="goSub" :key="'row:'+index"></schedule-row>
           </template>
         </tbody>
       </table>
     </div>
     <div v-else class="mobile-table">
-      <mobile-row v-for="(value) in times" :notop="notop" :value="value" :res="res" @openBox="goSub" :key="'times:'+value"></mobile-row>
+      <mobile-row v-for="(value, index) in subs" :notop="notop" :res="res" @openBox="goSub" :key="'times:'+index"></mobile-row>
     </div>
     <fancybox class="box" v-model="activityBox">
       <h2><span v-if="type !== '' && type !== '其他'">{{ type }} - </span><span>{{ topic }}</span></h2>
       <p class="text">負責人: {{ moderator !== '' ? moderator : 'N/A' }}</p>
       <p class="text"><span>領會: {{ worshipLeader !== '' ? worshipLeader : 'N/A' }}</span><span>司琴: {{ worshipPianist !== '' ? worshipPianist : 'N/A' }}</span></p>
       <p class="text" v-if="worshipGroup !== ''">敬拜小組: {{ worshipGroup }}</p>
-      <h3 v-if="subSpeakerName!==''">{{ 'About '+subSpeakerName }}</h3>
       <h4>簡介</h4>
       <div class="content" v-if="introduction !== ''">
         <div class="text">{{ introduction }}</div>
@@ -33,7 +36,80 @@ export default {
   name: 'Schedule',
   data () {
     return {
-      times: [],
+      times: [
+        {
+          date: new Date('07 07 2018'),
+          weeks: 0,
+          worshipLeader: 'Micheal',
+          worshipPianist: '韓寧',
+          topic: 'a',
+          introduction: 'aaa',
+          type: '小組查經'
+        },
+        {
+          date: new Date('07 14 2018'),
+          weeks: 1,
+          worshipLeader: '0',
+          worshipPianist: '1',
+          topic: '迎新',
+          introduction: 'aaaa',
+          type: '小組查經'
+        },
+        {
+          date: new Date('07 21 2018'),
+          weeks: 2,
+          worshipLeader: '1',
+          worshipPianist: '2',
+          topic: 'b',
+          introduction: 'bbbb',
+          type: '小組查經'
+        },
+        {
+          date: new Date('07 28 2018'),
+          weeks: 3,
+          worshipLeader: '3',
+          worshipPianist: '4',
+          topic: 'c',
+          introduction: 'c',
+          type: '小組查經'
+        },
+        {
+          date: new Date('08 04 2018'),
+          weeks: 0,
+          worshipLeader: 'Micheal',
+          worshipPianist: '韓寧',
+          topic: 'a',
+          introduction: 'aaa',
+          type: '小組查經'
+        },
+        {
+          date: new Date('08 11 2018'),
+          weeks: 1,
+          worshipLeader: '0',
+          worshipPianist: '1',
+          topic: '迎新',
+          introduction: 'aaaa',
+          type: '小組查經'
+        },
+        {
+          date: new Date('08 18 2018'),
+          weeks: 2,
+          worshipLeader: '1',
+          worshipPianist: '2',
+          topic: 'b',
+          introduction: 'bbbb',
+          type: '小組查經'
+        },
+        {
+          date: new Date('08 25 2018'),
+          weeks: 3,
+          worshipLeader: '3',
+          worshipPianist: '4',
+          topic: 'c',
+          introduction: 'c',
+          type: '小組查經'
+        }
+      ],
       activityBox: false,
       worshipLeader: '',
       worshipPianist: '',
@@ -49,26 +125,19 @@ export default {
   },
   computed: {
     subs: function () {
-      // let result = submissions.slice()
-      return null
+      return this.times
     },
     res: function () {
-      var temp = _.map(this.subs, (slot) => ({
-        ...slot,
-        start: new Date(slot.start),
-        end: new Date(slot.end)
-      }))
-      this.times = _.map(temp, 'start')
-      this.times = _.uniqBy(this.times, this.formatDate)
-      this.times = this.times.slice().sort()
-
-      return _.groupBy(temp, (schedule) => (schedule.start))
+      return _.groupBy(this.subs, (schedule) => (schedule.weeks))
     }
   },
   methods: {
     paddingLeft (num) {
       if (num / 10 < 1) return '0' + num
       else return num
+    },
+    getMonth (date) {
+      return date.getMonth()
     },
     formatDate (date) {
       return this.paddingLeft(date.getMonth() + 1) + '/' + this.paddingLeft(date.getDate())
