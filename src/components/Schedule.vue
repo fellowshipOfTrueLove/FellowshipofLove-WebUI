@@ -1,7 +1,7 @@
 <template>
   <div class="schedule">
     <div v-if="!mobile" class="container">
-      <h1>{{(getMonth(res[0][0].date) + 1) + '~' + (getMonth(res[0][0].date) + 4) + '月聚會內容'}}</h1>
+      <h1>{{getMonth(res[0][0].date) + '~' + ((getMonth(res[0][0].date) + 2) % 12 + 1) + '月聚會內容'}}</h1>
       <table>
         <tbody>
           <tr>
@@ -15,7 +15,7 @@
       </table>
     </div>
     <div v-else class="mobile-table">
-      <h1>{{(Number(Object.keys(res)[0]) + 1) + '~' + (Number(Object.keys(res)[0]) + 4) + '月聚會內容'}}</h1>
+      <h1>{{(Number(Object.keys(res)[0])) + '~' + ((Number(Object.keys(res)[0]) + 2) % 12 + 1) + '月聚會內容'}}</h1>
       <mobile-row v-for="(value, index) in res" :month="getMonth(value[0].date)" :vvalue="value" :res="res" :notop="notop" @openBox="goSub" :key="'times:'+index"></mobile-row>
     </div>
     <fancybox class="box" v-model="activityBox">
@@ -150,10 +150,10 @@ export default {
       else return num
     },
     getMonth (date) {
-      return date.getMonth()
+      return date.getMonth() + 1
     },
     formatDate (date) {
-      return this.paddingLeft(date.getMonth() + 1) + '/' + this.paddingLeft(date.getDate())
+      return this.paddingLeft(date.getMonth()) + '/' + this.paddingLeft(date.getDate())
     },
     goSub (sub) {
       this.$router.replace('/calendar/sub/' + sub.uid)

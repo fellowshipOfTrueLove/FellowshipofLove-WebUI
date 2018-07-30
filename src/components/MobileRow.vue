@@ -1,6 +1,6 @@
 <template>
   <div class="mobile-item">
-    <div class="timecol" :class="{'notop':notop}">{{ month + 1 + '月' }}</div>
+    <div class="timecol" :class="{'notop':notop}">{{ month + '月' }}</div>
     <div class="content clickable" @click.stop="openBox(value)" v-for="(value, index) in vvalue" :key="'row:'+index">
       <div>
         <div class="title">{{formatTime(value.date) + '  ' + value.type}}</div>

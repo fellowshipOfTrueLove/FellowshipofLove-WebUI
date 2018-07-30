@@ -69,7 +69,6 @@ export default {
 article
   width: 100%
   background-color: white
-  min-height: 75vh
   p.temp
     font-size: 36px
     height: 70vh

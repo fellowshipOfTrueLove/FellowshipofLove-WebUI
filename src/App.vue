@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <main-nav v-if="appMode()"></main-nav>
-    <main :class="{ app: !appMode() }">
+    <main class="Main" :class="{ app: !appMode() }">
       <transition :name="transitionName">
         <keep-alive>
           <router-view class="child-view"/>
@@ -23,6 +23,16 @@ export default {
   methods: {
     appMode () {
       return window.location.search.match('mode=app') === null
+    },
+    h () {
+      if (document.getElementsByClassName('Navbar')[0].clientHeight + document.getElementsByClassName('Main')[0].clientHeight + document.getElementsByClassName('Footer')[0].clientHeight < window.innerHeight) {
+        document.getElementsByClassName('Footer')[0].classList.add('fix')
+      } else {
+        document.getElementsByClassName('Footer')[0].classList.remove('fix')
+      }
+    },
+    resize () {
+      this.h()
     }
   },
   watch: {
@@ -30,7 +40,24 @@ export default {
       const toDepth = to.meta.index
       const fromDepth = from.meta.index
       this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+      let self = this
+      setTimeout(() => {
+        self.h()
+      }, 100)
     }
+  },
+  mounted () {
+    let self = this
+    window.addEventListener('resize', function () {
+      self.resize()
+    })
+    this.h()
+  },
+  destroyed () {
+    let self = this
+    window.removeEventListener('resize', function () {
+      self.resize()
+    })
   }
 }
 </script>
@@ -55,6 +82,10 @@ main.app
   transition-duration: .5s
   transition-timing-function: cubic-bezier(.55,0,.1,1)
 .BibleBus
+  position: fixed
+  width: 100%
+  bottom: 0
+.fix
   position: fixed
   width: 100%
   bottom: 0

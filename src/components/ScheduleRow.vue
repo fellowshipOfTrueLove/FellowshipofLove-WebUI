@@ -1,8 +1,8 @@
 <template>
   <tr class="sub">
     <template v-for="index in len">
-      <template v-if="findSub(index + startMonth, res[value[0].weeks]) !== undefined">
-        <schedule-col :broadcast="false"  :sub="findSub(index + startMonth, res[value[0].weeks])"  @openBox="openBox" :key="indexx+':'+index"></schedule-col>
+      <template v-if="findSub(index + startMonth - 1, res[value[0].weeks]) !== undefined">
+        <schedule-col :broadcast="false"  :sub="findSub(index + startMonth - 1, res[value[0].weeks])"  @openBox="openBox" :key="indexx+':'+index"></schedule-col>
       </template>
       <td class="item space" v-else :key="'space:'+index"></td>
     </template>
@@ -28,15 +28,18 @@ export default {
       return this.paddingLeft(date.getMonth() + 1) + '/' + this.paddingLeft(date.getDate())
     },
     getMonth (date) {
-      return date.getMonth()
+      return date.getMonth() + 1
     },
     findSub (index, subs) {
       let self = this
-      return _.find(subs, (value) => { return self.getMonth(value.date) + 1 === index })
+      return _.find(subs, (value) => { return self.getMonth(value.date) === index })
     },
     openBox (sub) {
       this.$emit('openBox', sub)
     }
+  },
+  mounted () {
+    // console.log(this.startMonth, this.value)
   }
 }
 </script>
