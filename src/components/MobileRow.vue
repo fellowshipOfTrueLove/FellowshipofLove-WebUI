@@ -42,7 +42,9 @@
     padding-left: 18px
     padding-right: 18px
     background-color: #54656E
-    font-size: 25px
+    font-size: 35px
+    @media all and (max-width: 700px)
+      font-size: 25px
     position: sticky
     top: $nav-mobile-height
   .notop
@@ -63,7 +65,11 @@
         vertical-align: top
       .title
         width: 80%
-        font-size: 18px
+        font-size: 30px
+        @media all and (max-width: 700px)
+          font-size: 23px
+        @media all and (max-width: 500px)
+          font-size: 18px
         font-weight: 500
         white-space: pre-line
         padding-bottom: 3px
@@ -78,7 +84,11 @@
         padding-top: 5px
       .topic
         width: 50%
-        font-size: 14px
+        font-size: 20px
+        @media all and (max-width: 700px)
+          font-size: 17px
+        @media all and (max-width: 500px)
+          font-size: 14px
         font-weight: 500
       .interval
         width: 50%

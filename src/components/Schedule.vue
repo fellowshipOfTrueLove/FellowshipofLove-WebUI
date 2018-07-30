@@ -236,6 +236,8 @@ div.schedule
   div.mobile-table
     h1
       font-size: 2.5rem
+      @media all and (max-width: 400px)
+        font-size: 2rem
       padding-bottom: 20px
 @media all and (max-width: 1000px)
   div.schedule
