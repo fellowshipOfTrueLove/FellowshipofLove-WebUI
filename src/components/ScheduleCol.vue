@@ -1,6 +1,13 @@
 <template>
-  <td class="item clickable" :class="{short: sub.type === 'S'}" v-if="sub.introduction !== ''" @click.stop="openBox(sub)" :rowspan="calcRowspan(sub)"  :colspan="(broadcast)?5:''">{{ sub.topic }}<p v-if="sub.type != ''">{{sub.type}}</p></td>
-  <td class="item" v-else :rowspan="calcRowspan(sub)" :colspan="(broadcast)?5:''">{{ sub.topic }}<p v-if="sub.type != ''">{{sub.type}}</p></td>
+  <td class="item clickable" :class="{short: sub.type === 'S'}" v-if="sub.introduction !== ''" @click.stop="openBox(sub)" :rowspan="calcRowspan(sub)"  :colspan="(broadcast)?5:''">
+    <h1>{{ formatDate(sub.date) }}</h1>
+    <h2>{{ sub.topic }}</h2>
+    <p v-if="sub.type != ''">{{sub.type}}</p>
+  </td>
+  <td class="item" v-else :rowspan="calcRowspan(sub)" :colspan="(broadcast)?5:''">
+    {{ sub.topic }}
+    <p v-if="sub.type != ''">{{sub.type}}</p>
+  </td>
 </template>
 
 <script>
@@ -29,6 +36,13 @@ export default {
       // }
       return 1
     },
+    paddingLeft (num) {
+      if (num / 10 < 1) return '0' + num
+      else return num
+    },
+    formatDate (date) {
+      return this.paddingLeft(date.getMonth() + 1) + '/' + this.paddingLeft(date.getDate())
+    },
     openBox (sub) {
       this.$emit('openBox', sub)
     }
@@ -38,6 +52,7 @@ export default {
 
 <style lang="sass" scoped>
 .item
+  text-align: left
   background-color: #73828A
   color: white
   padding: 12px
@@ -50,20 +65,30 @@ export default {
     font-size: 12px
     color: #ffeb3b
     font-weight: 500
+  h1
+    padding-top: 10px
+    padding-bottom: 20px
+  h2
+    font-size: 20px
+    padding-bottom: 10px
+    padding-left: 3px
   p
     font-size: 15px
+    padding-left: 3px
 .item.short
   background-color: #96A3AA
 .clickable
   cursor: pointer
   &:hover,&:active
     opacity: 0.6
-@media all and (max-width: 1000px)
+@media all and (max-width: 1200px)
   .item
     background-color: #73828A
     color: white
     padding: 6px
     white-space: pre-line
+    h2
+      font-size: 15px
     p
       font-size: 12px
 </style>

@@ -1,6 +1,7 @@
 <template>
   <div class="schedule">
     <div v-if="!mobile" class="container">
+      <h1>{{(getMonth(res[0][0].date) + 1) + '~' + (getMonth(res[0][0].date) + 4) + '月聚會內容'}}</h1>
       <table>
         <tbody>
           <tr>
@@ -14,7 +15,8 @@
       </table>
     </div>
     <div v-else class="mobile-table">
-      <mobile-row v-for="(value, index) in subs" :value="value" :notop="notop" @openBox="goSub" :key="'times:'+index"></mobile-row>
+      <h1>{{(Number(Object.keys(res)[0]) + 1) + '~' + (Number(Object.keys(res)[0]) + 4) + '月聚會內容'}}</h1>
+      <mobile-row v-for="(value, index) in res" :month="getMonth(value[0].date)" :vvalue="value" :res="res" :notop="notop" @openBox="goSub" :key="'times:'+index"></mobile-row>
     </div>
     <fancybox class="box" v-model="activityBox">
       <h2><span v-if="type !== undefined && type !== '' && type !== '其他'">{{ type }} &nbsp; - &nbsp;</span><span>{{ topic }}</span></h2>
@@ -136,7 +138,10 @@ export default {
       return this.times
     },
     res: function () {
-      return _.groupBy(this.subs, (schedule) => (schedule.weeks))
+      if (this.mobile) {
+        return _.groupBy(this.subs, schedule => this.getMonth(schedule.date))
+      }
+      return _.groupBy(this.subs, schedule => schedule.weeks)
     }
   },
   methods: {
@@ -214,6 +219,9 @@ div.schedule
   $time-width: 80px
   margin-bottom: 20px
   div.container
+    h1
+      font-size: 3rem
+      padding-bottom: 30px
     overflow-y: hidden
     table
       width: 100%
@@ -225,6 +233,10 @@ div.schedule
           th
             width: 20%
             font-size: 16px
+  div.mobile-table
+    h1
+      font-size: 2.5rem
+      padding-bottom: 20px
 @media all and (max-width: 1000px)
   div.schedule
     $time-width: 60px
