@@ -41,7 +41,7 @@ export default {
       times: [
         {
           uid: '0',
-          date: new Date('07 07 2018'),
+          date: new Date('07/07/2018'),
           weeks: 0,
           worshipLeader: 'Micheal',
           worshipPianist: '韓寧',
@@ -51,7 +51,7 @@ export default {
         },
         {
           uid: '1',
-          date: new Date('07 14 2018'),
+          date: new Date('07/14/2018'),
           weeks: 1,
           worshipLeader: '0',
           worshipPianist: '1',
@@ -61,7 +61,7 @@ export default {
         },
         {
           uid: '2',
-          date: new Date('07 21 2018'),
+          date: new Date('07/21/2018'),
           weeks: 2,
           worshipLeader: '1',
           worshipPianist: '2',
@@ -71,7 +71,7 @@ export default {
         },
         {
           uid: '3',
-          date: new Date('07 28 2018'),
+          date: new Date('07/28/2018'),
           weeks: 3,
           worshipLeader: '3',
           worshipPianist: '4',
@@ -81,7 +81,7 @@ export default {
         },
         {
           uid: '4',
-          date: new Date('08 04 2018'),
+          date: new Date('08/04/2018'),
           weeks: 0,
           worshipLeader: 'Micheal',
           worshipPianist: '韓寧',
@@ -91,7 +91,7 @@ export default {
         },
         {
           uid: '5',
-          date: new Date('08 11 2018'),
+          date: new Date('08/11/2018'),
           weeks: 1,
           worshipLeader: '0',
           worshipPianist: '1',
@@ -101,7 +101,7 @@ export default {
         },
         {
           uid: '6',
-          date: new Date('08 18 2018'),
+          date: new Date('08/18/2018'),
           weeks: 2,
           worshipLeader: '1',
           worshipPianist: '2',
@@ -111,7 +111,7 @@ export default {
         },
         {
           uid: '7',
-          date: new Date('08 25 2018'),
+          date: new Date('08/25/2018'),
           weeks: 3,
           worshipLeader: '3',
           worshipPianist: '4',
@@ -141,7 +141,7 @@ export default {
       if (this.mobile) {
         return _.groupBy(this.subs, schedule => this.getMonth(schedule.date))
       }
-      return _.groupBy(this.subs, schedule => schedule.weeks)
+      return _.groupBy(this.subs, schedule => ~~((schedule.date.getDate() - 1) / 7))
     }
   },
   methods: {

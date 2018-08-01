@@ -51,7 +51,9 @@ export default {
     window.addEventListener('resize', function () {
       self.resize()
     })
-    this.h()
+    setTimeout(() => {
+      self.h()
+    }, 100)
   },
   destroyed () {
     let self = this
